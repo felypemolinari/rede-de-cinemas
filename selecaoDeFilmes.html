@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinema - Compra de Ingressos</title>
+    <link rel="stylesheet" href="assets/styles/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Rede de Cinemas</h1>
+    </header>
+
+    <section id="tela-filmes">
+        <h2>Selecione um filme</h2>
+        <div class="filmes-container">
+            <div class="filme-wrapper">
+                <div class="filme" onclick="abrirDetalhesFilme('vitoria')" id="vitoria">
+                    <h3>Vitória</h3>
+                    <img src="assets/imagens/Vitoria.jpg" alt="Vitória">
+                    <p>Duração: 113 mins</p>
+                </div>
+                <a href="./assentos.html" class="botao" onclick="comprarIngressos('vitoria')">Comprar Ingresso</a>
+            </div>
+
+            <div class="filme-wrapper">
+                <div class="filme" onclick="abrirDetalhesFilme('oppenheimer')" id="oppenheimer">
+                    <h3>Oppenheimer</h3>
+                    <img src="assets/imagens/Oppenheimer.jpg" alt="Oppenheimer">
+                    <p>Duração: 181 mins</p>
+                </div>
+                <a href="./assentos.html" class="botao" onclick="comprarIngressos('oppenheimer')">Comprar Ingresso</a>
+            </div>
+            
+            <div class="filme-wrapper">
+                <div class="filme" onclick="abrirDetalhesFilme('interestelar')" id="interestelar">
+                    <h3>Interestelar</h3>
+                    <img src="assets/imagens/Interstellar.png" alt="Interestelar">
+                    <p>Duração: 169 mins</p>
+                </div>
+                <a href="./assentos.html" class="botao" onclick="comprarIngressos('interestelar')">Comprar Ingresso</a>
+            </div>
+            
+            <div class="filme-wrapper">
+                <div class="filme" onclick="abrirDetalhesFilme('homem-aranha')" id="homem-aranha">
+                    <h3>Homem Aranha no Aranhaverso</h3>
+                    <img src="assets/imagens/Homem_Aranha.png" alt="Homem Aranha no Aranhaverso">
+                    <p>Duração: 117 mins</p>
+                </div>
+                <a href="./assentos.html" class="botao" onclick="comprarIngressos('homem-aranha')">Comprar Ingresso</a>
+            </div>
+            
+            <div class="filme-wrapper">
+                <div class="filme" onclick="abrirDetalhesFilme('trem-bala')" id="trem-bala">
+                    <h3>Trem-Bala</h3>
+                    <img src="assets/imagens/Bullet_Train.jpg" alt="Trem-Bala">
+                    <p>Duração: 126 mins</p>
+                </div>
+                <a href="./assentos.html" class="botao" onclick="comprarIngressos('trem-bala')">Comprar Ingresso</a>
+            </div>
+        </div>
+    </section>
+
+    <div id="modal-detalhes" class="modal">
+        <div class="modal-content">
+        <span class="close" onclick="fecharModal()">&times;</span>
+        <div id="detalhes-filme"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Rede de Cinemas. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="assets/scripts/script.js"></script>
+</body>
+</html>
