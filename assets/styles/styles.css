@@ -292,3 +292,20 @@ h2 {
     align-items: center;
     gap: 1rem;
 }
+
+.campo-input {
+    background-color: #1a1a1a;
+    border: 1px solid #2f67ff88;
+    color: white;
+    padding: 0.5rem 0.8rem;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+.campo-input:focus {
+    border: 1px solid #2f67ff;
+    outline: none;
+    box-shadow: 0 0 8px rgba(47, 103, 255, 0.5);
+}

@@ -1,3 +1,4 @@
+// Objeto que armazena os dados da compra: filme, assentos, combo e pagamento.
 const compra = {
     filme: null,
     assentos: [],
@@ -5,10 +6,11 @@ const compra = {
     pagamento: {}
 };
 
+// Quando a página é carregada
 window.onload = () => {
-    const saved = sessionStorage.getItem('compra');
+    const saved = sessionStorage.getItem('compra'); // Tenta recuperar dados salvos na sessão
     if (saved) {
-        Object.assign(compra, JSON.parse(saved));
+        Object.assign(compra, JSON.parse(saved)); // Se existir, atualiza o objeto compra.
         
         // Atualiza visualmente os assentos já selecionados
         if (window.location.pathname.includes('assentos.html')) {
@@ -22,11 +24,13 @@ window.onload = () => {
         }
     }
 
+    // Se for a página de revisão, monta as informações de revisão.
     if (window.location.pathname.includes('revisao.html')) {
         montarRevisao();
     }
 };
-  
+ 
+// Função que abre um modal com os detalhes do filme selecionado
 function abrirDetalhesFilme(filmeId) {
     let detalhes = '';
     if (filmeId === 'vitoria'){
@@ -101,15 +105,17 @@ function abrirDetalhesFilme(filmeId) {
         compra.filme = 'Trem-Bala';
     }
 
-
+    // Exibe o modal com as informações do filme.
     document.getElementById('detalhes-filme').innerHTML = detalhes;
     document.getElementById('modal-detalhes').style.display = 'block';
 }
 
+// Fecha o modal de detalhes do filme.
 function fecharModal() {
     document.getElementById('modal-detalhes').style.display = 'none';
 }
 
+// Função que inicia o processo de compra, salvando o filme e redirecionando para a página de assentos.
 function comprarIngressos(filmeId) {
     let nomeFilme = '';
 
@@ -126,6 +132,7 @@ function comprarIngressos(filmeId) {
     window.location.href = './assentos.html';
 }
 
+// Função para selecionar ou desmarcar assentos.
 function selecionarAssento(botao) {
     // Impede seleção de assentos ocupados
     if (botao.classList.contains('ocupado')) return;
@@ -147,12 +154,50 @@ function selecionarAssento(botao) {
     sessionStorage.setItem('compra', JSON.stringify(compra));
 }
 
+// Função que salva a escolha do combo e avisa o usuário.
 function selecionarCombo(combo) {
     compra.combo = combo;
     sessionStorage.setItem('compra', JSON.stringify(compra));
     alert('Combo selecionado: ' + combo);
 }
 
+function salvarComboPersonalizado() {
+    const pipocaQuantidade = parseInt(document.getElementById('pipoca-quantidade').value) || 0;
+    const refrigeranteQuantidade = parseInt(document.getElementById('refrigerante-quantidade').value) || 0;
+    const chocolateQuantidade = parseInt(document.getElementById('chocolate-quantidade').value) || 0;
+
+    // Verifica se pelo menos um item tem quantidade maior que 0
+    if (pipocaQuantidade === 0 && refrigeranteQuantidade === 0 && chocolateQuantidade === 0) {
+        alert('Por favor, selecione a quantidade de pelo menos um item para o combo!');
+        return;
+    }
+
+    const pipoca = {
+        tamanho: document.getElementById('pipoca-tamanho').value,
+        quantidade: parseInt(document.getElementById('pipoca-quantidade').value) || 0
+    };
+
+    const refrigerante = {
+        tamanho: document.getElementById('refrigerante-tamanho').value,
+        quantidade: parseInt(document.getElementById('refrigerante-quantidade').value) || 0
+    };
+
+    const chocolate = {
+        quantidade: parseInt(document.getElementById('chocolate-quantidade').value) || 0
+    };
+
+    compra.combo = {
+        personalizado: true,
+        pipoca,
+        refrigerante,
+        chocolate
+    };
+
+    sessionStorage.setItem('compra', JSON.stringify(compra));
+    alert('Combo personalizado salvo com sucesso!');
+}
+
+// Validação dos dados do pagamento.
 function validarPagamento() {
     const nome = document.getElementById('nome-cartao').value;
     const numero = document.getElementById('numero-cartao').value;
@@ -176,15 +221,31 @@ function validarPagamento() {
     return false;
 }
 
+// Monta a visualização de revisão da compra.
 function montarRevisao() {
     const revisaoContainer = document.getElementById('info-revisao');
+
+    let comboTexto = 'Nenhum combo selecionado.';
+    if (compra.combo) {
+        if (typeof compra.combo === 'string') {
+            comboTexto = compra.combo; // Combo 1 ou Combo 2
+        } else if (compra.combo.personalizado) {
+            comboTexto = `
+                <strong>Combo Personalizado:</strong><br>
+                Pipoca: ${compra.combo.pipoca.quantidade}x (${compra.combo.pipoca.tamanho})<br>
+                Refrigerante: ${compra.combo.refrigerante.quantidade}x (${compra.combo.refrigerante.tamanho})<br>
+                Chocolate: ${compra.combo.chocolate.quantidade}x
+            `;
+        }
+    }
+
     revisaoContainer.innerHTML = `
         <h3>Filme:</h3>
         <p>${compra.filme ? compra.filme : 'Nenhum filme selecionado.'}</p>
         <h3>Assentos:</h3>
         <p>${compra.assentos.length > 0 ? compra.assentos.join(', ') : 'Nenhum assento selecionado.'}</p>
         <h3>Combo:</h3>
-        <p>${compra.combo ? compra.combo : 'Nenhum combo selecionado.'}</p>
+        <p>${comboTexto}</p>
         <h3>Pagamento:</h3>
         <p>Nome: ${compra.pagamento.nome ? compra.pagamento.nome : ''}</p>
         <p>Número: ${compra.pagamento.numero ? '**** **** **** ' + compra.pagamento.numero.slice(-4) : ''}</p>
@@ -192,6 +253,7 @@ function montarRevisao() {
     `;
 }
 
+// Finaliza a compra, exibe mensagem de agradecimento e reseta os dados.
 function confirmarCompra() {
     alert('Obrigado pela compra!');
     compra.filme = null;
@@ -201,9 +263,3 @@ function confirmarCompra() {
     sessionStorage.setItem('compra', JSON.stringify(compra));
     window.location.href = './selecaoDeFilmes.html';
 }
-
-//   \__
-//  (    @\___
-//  /         O
-//  /   (_____/
-//  /_____/   U

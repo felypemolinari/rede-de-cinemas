@@ -13,15 +13,55 @@
             <div class="combo">
                 <h3>Combo 1</h3>
                 <p>1 Refrigerante + Pipoca Média</p>
-                <button onclick="selecionarCombo('Combo 1')">Selecionar</button>
+                <button onclick="selecionarCombo('Combo 1')">Selecionar Combo 1</button>
             </div>
             <div class="combo">
                 <h3>Combo 2</h3>
                 <p>2 Refrigerantes + Pipoca Grande</p>
-                <button onclick="selecionarCombo('Combo 2')">Selecionar</button>
+                <button onclick="selecionarCombo('Combo 2')">Selecionar Combo 2</button>
             </div>
         </div>
 
+        <h2>Ou monte seu próprio combo</h2>
+        <div class="combos-container">
+    
+            <div class="combo-item">
+                <h3>Pipoca</h3>
+                <label>Tamanho:</label>
+                <select id="pipoca-tamanho" class="campo-input">
+                    <option value="Pequena">Pequena</option>
+                    <option value="Média">Média</option>
+                    <option value="Grande">Grande</option>
+                </select>
+                <label>Quantidade:</label>
+                <input type="number" id="pipoca-quantidade" value="0" min="0" class="campo-input">
+            </div>
+    
+            <div class="combo-item">
+                <h3>Refrigerante</h3>
+                <label>Tamanho:</label>
+                <select id="refrigerante-tamanho" class="campo-input">
+                    <option value="300ml">300ml</option>
+                    <option value="500ml">500ml</option>
+                    <option value="1L">1L</option>
+                </select>
+                <label>Quantidade:</label>
+                <input type="number" id="refrigerante-quantidade" value="0" min="0" class="campo-input">
+            </div>
+    
+            <div class="combo-item">
+                <h3>Chocolate</h3>
+                <label>Quantidade:</label>
+                <input type="number" id="chocolate-quantidade" value="0" min="0" class="campo-input">
+            </div>
+
+        </div>
+
+        <div class="botoes-navegacao">
+
+            <button onclick="salvarComboPersonalizado()" class="botao">Salvar Combo Personalizado</button>
+        </div>
+    
         <div class="botoes-navegacao">
             <a href="./assentos.html" class="botao">Voltar</a>
             <a href="./pagamento.html" class="botao">Próximo</a>
