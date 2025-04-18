@@ -1,4 +1,4 @@
-Este projeto foi desenvolvido como parte da disciplina **Programação Web**, com o objetivo de criar uma aplicação front-end que simula a experiência de compra de ingressos em uma rede de cinemas.
+Este projeto foi desenvolvido como um trabalho da disciplina **Programação Web**, com o objetivo de criar uma aplicação front-end que simula a experiência de compra de ingressos em uma rede de cinemas.
 
 ## Desenvolvedores
 
